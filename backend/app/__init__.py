@@ -17,10 +17,8 @@ def create_app(config_name='development'):
 
     # Register routes
     from app.routes.ticket import ticket_bp
-    from app.emails.team_mail import email_bp
     
     app.register_blueprint(ticket_bp, url_prefix='/api')
-    app.register_blueprint(email_bp, url_prefix='/api')
     
 
     return app

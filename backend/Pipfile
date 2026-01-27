@@ -19,6 +19,8 @@ gunicorn = "*"
 fastapi = "*"
 uvicorn = "*"
 pydantic = "*"
+celery = "*"
+redis = "*"
 
 [dev-packages]
 

@@ -1,11 +1,12 @@
 from flask import Blueprint, request, jsonify
 from app.extensions import db
 from app.models.models import SupportTicket
+from app.task import send_confirmation_email
 
 ticket_bp = Blueprint('ticket_bp', __name__)
 
 # Create Ticket (POST)
-@ticket_bp.route('tickets', methods=['POST'])
+@ticket_bp.route('/tickets', methods=['POST'])
 def create_ticket():
     data = request.get_json()
 
@@ -19,6 +20,9 @@ def create_ticket():
     db.session.add(new_ticket)
     db.session.commit()
 
+    # Send confirmation email asynchronously
+    send_confirmation_email.delay(new_ticket.id)
+
     return jsonify({
         'message': 'Ticket created successfully',
         'ticket_id': new_ticket.id
@@ -26,7 +30,7 @@ def create_ticket():
 
 
 # Get All Tickets (GET)
-@ticket_bp.route('tickets/list', methods=['GET'])
+@ticket_bp.route('/tickets/list', methods=['GET'])
 def get_tickets():
     tickets = SupportTicket.query.all()
 
