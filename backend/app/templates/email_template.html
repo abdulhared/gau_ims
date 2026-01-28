@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support Ticket Confirmation</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f4f4f9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color:#333333;">
+
+  <!-- Main wrapper -->
+  <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#f4f4f9; padding:30px 10px;">
+    <tr>
+      <td align="center">
+
+        <!-- Container -->
+        <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:580px; background-color:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,0.08);">
+          
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #4f46e5 0%, #6d28d9 100%); padding:40px 30px 30px; text-align:center; color:white;">
+              <h1 style="margin:0; font-size:28px; font-weight:600;">Support Ticket Received</h1>
+              <p style="margin:12px 0 0; font-size:16px; opacity:0.95;">
+                Ticket #{{ ticket.id }}
+              </p>
+            </td>
+          </tr>
+
+          <!-- Content -->
+          <tr>
+            <td style="padding:40px 30px; font-size:16px; line-height:1.55; color:#1f2937;">
+              
+              <p style="margin:0 0 20px;">Hello <strong>{{ ticket.std_name }}</strong>,</p>
+              
+              <p style="margin:0 0 24px;">Your support ticket has been successfully created.</p>
+
+              <!-- Ticket details box -->
+              <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#f8fafc; border-radius:8px; padding:24px; margin:0 0 28px;">
+                <tr>
+                  <td>
+                    <strong style="color:#4b5563; display:block; margin-bottom:4px;">Ticket ID</strong>
+                    <div style="font-size:18px; font-weight:500; margin-bottom:16px;">#{{ ticket.id }}</div>
+
+                    <strong style="color:#4b5563; display:block; margin-bottom:4px;">Registration Number</strong>
+                    <div style="font-size:17px; margin-bottom:16px;">{{ ticket.reg_number }}</div>
+
+                    <strong style="color:#4b5563; display:block; margin-bottom:4px;">Issue</strong>
+                    <div style="font-size:17px; margin-bottom:8px;">{{ ticket.issue_type }}</div>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin:0 0 24px; font-size:15px; color:#4b5563; background-color:#fefce8; padding:16px 20px; border-radius:6px; border-left:4px solid #ca8a04;">
+                <strong>We aim to respond within 24–48 hours.</strong><br>
+                Please keep this email for your records.
+              </p>
+
+              <p style="margin:0 0 20px;">If your matter is urgent, feel free to reply directly to this email.</p>
+
+              <p style="margin:32px 0 0;">Best regards,<br>
+              <strong>The Support Team</strong></p>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color:#f8fafc; padding:28px 30px; text-align:center; font-size:14px; color:#6b7280; border-top:1px solid #e5e7eb;">
+              <p style="margin:0 0 8px;">© {{ year|default('2025–2026') }} Your Institution / Company</p>
+              <p style="margin:0;">
+                Garissa, Kenya
+              </p>
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

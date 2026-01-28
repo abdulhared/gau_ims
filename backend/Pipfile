@@ -21,6 +21,7 @@ uvicorn = "*"
 pydantic = "*"
 celery = "*"
 redis = "*"
+aiosmtpd = "*"
 
 [dev-packages]
 

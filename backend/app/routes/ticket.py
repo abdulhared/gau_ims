@@ -1,14 +1,13 @@
-from flask import Blueprint, request, jsonify
-from app.extensions import db
+from flask import Blueprint, request, jsonify, render_template
+from flask_mail import Message
+from app.extensions import db, mail               # ← mail must be initialized
 from app.models.models import SupportTicket
-from app.task import send_confirmation_email
 
 ticket_bp = Blueprint('ticket_bp', __name__)
 
-# Create Ticket (POST)
 @ticket_bp.route('/tickets', methods=['POST'])
 def create_ticket():
-    data = request.get_json()
+    data = request.get_json() or {}
 
     new_ticket = SupportTicket(
         std_name=data.get('stdName'),
@@ -17,17 +16,31 @@ def create_ticket():
         issue_type=data.get('issueDescription')
     )
 
-    db.session.add(new_ticket)
-    db.session.commit()
+    try:
+        db.session.add(new_ticket)
+        db.session.commit()
 
-    # Send confirmation email asynchronously
-    send_confirmation_email.delay(new_ticket.id)
+        # Send confirmation email
+        msg = Message(
+            subject=f"Support Ticket #{new_ticket.id} Received",
+            recipients=[new_ticket.std_email],
+            html=render_template(
+                'email_template.html',
+                ticket=new_ticket,           # ← pass the object
+                year=2025                    # optional
+            )
+        )
 
-    return jsonify({
-        'message': 'Ticket created successfully',
-        'ticket_id': new_ticket.id
-    }), 201
+        mail.send(msg)
 
+        return jsonify({
+            'message': 'Ticket created successfully',
+            'ticket_id': new_ticket.id
+        }), 201
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": "Failed to process request"}), 500
 
 # Get All Tickets (GET)
 @ticket_bp.route('/tickets/list', methods=['GET'])
