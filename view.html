@@ -3,27 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>View Tickets</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/view.css">
 </head>
 <body>
 
-    <h2>Submitted Support Tickets</h2>
-
-    <table id="ticketsTable">
+    <div class="container">
+        <div class="header">
+            <h2>Submitted Support Tickets</h2>
+        </div>
+        <div class="c_table">
+            <table id="ticketsTable">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Email</th>
+                
                 <th>Reg Number</th>
                 <th>Issue</th>
                 <th>Date</th>
+                <th>Actions</th>
+                
             </tr>
         </thead>
         <tbody>
             <!-- Tickets inserted here -->
         </tbody>
     </table>
+        </div>
+    </div>
 
-<script src="js/viewTickets.js"></script>
+<script type="module" src="js/viewTickets.js"></script>
 </body>
 </html>

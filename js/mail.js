@@ -1,12 +1,8 @@
 
-const form = document.getElementById('supportForm');
-const message = document.getElementById('message');
+const formTicket = document.getElementById('supportForm');
 
-form.addEventListener('submit', async function(e) {
+formTicket.addEventListener('submit', async function(e) {
     e.preventDefault();
-
-    message.textContent = "Submitting...";
-    message.style.color = "blue";
 
     const ticketData = {
         stdName: document.getElementById('stdName').value.trim(),
@@ -15,15 +11,13 @@ form.addEventListener('submit', async function(e) {
         issueDescription: document.getElementById('issueDescription').value.trim()
     };
 
-    // Quick client-side check
     if (!ticketData.stdName || !ticketData.stdEmail || !ticketData.regNumber || !ticketData.issueDescription) {
-        message.style.color = "red";
-        message.textContent = "Please fill all fields.";
+        alert("Please fill all fields.");
         return;
     }
 
     try {
-        const response = await fetch('http://127.0.0.1:5000/api/tickets', {
+        const response = await fetch('http://127.0.0.1:5000/api/ticket/received', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(ticketData)
@@ -32,19 +26,11 @@ form.addEventListener('submit', async function(e) {
         const result = await response.json();
 
         if (!response.ok) {
-            throw new Error(result.error || "Error submitting ticket");
-        }   
-
-
-        const ticketId = result.ticket_id;
-
-        message.style.color = "green";
-        message.textContent = `Ticket submitted successfully! ID: ${ticketId}`;
-        form.reset();
-
+            throw new Error(result.error || "Error submitting");
+        } 
     } catch (error) {
         message.style.color = "red";
         message.textContent = error.message || "Server not reachable.";
         console.error(error);
     }
-});
+})
