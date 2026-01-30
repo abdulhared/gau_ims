@@ -20,19 +20,6 @@ def create_ticket():
         db.session.add(new_ticket)
         db.session.commit()
 
-        # Send confirmation email
-        msg = Message(
-            subject=f"Support Ticket #{new_ticket.id} Received",
-            recipients=[new_ticket.std_email],
-            html=render_template(
-                'email_template.html',
-                ticket=new_ticket,           # ← pass the object
-                year=2025                    # optional
-            )
-        )
-
-        mail.send(msg)
-
         return jsonify({
             'message': 'Ticket created successfully',
             'ticket_id': new_ticket.id
