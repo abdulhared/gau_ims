@@ -1,0 +1,120 @@
+/* General layout */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-radius: 10px;
+}
+
+.header h2 {
+    margin: 0 0 20px 0;
+    font-weight: 600;
+    color: #222;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+thead {
+    background-color: #f0f0f0;
+}
+
+thead th {
+    padding: 12px 15px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #555;
+}
+
+tbody td {
+    padding: 12px 15px;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Zebra stripes for better readability */
+tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* Hover effect */
+tbody tr:hover {
+    background-color: #f1f7ff;
+}
+
+/* Actions buttons */
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn.tick {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn.tick:hover {
+    background-color: #45a049;
+}
+
+.btn.email {
+    background-color: #d44638;
+    color: white;
+}
+
+.btn.email:hover {
+    background-color: #c13527;
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    thead tr {
+        display: none;
+    }
+
+    tbody td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+    tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #555;
+    }
+
+    .actions {
+        justify-content: flex-start;
+        gap: 5px;
+    }
+}
