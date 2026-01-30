@@ -1,0 +1,48 @@
+# -------------------------
+# Python / Flask
+# -------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Flask / instance folder
+instance/
+
+# Flask-Migrate files
+migrations/
+
+# Environment variables
+.env
+
+# -------------------------
+# Logs
+# -------------------------
+*.log
+
+# -------------------------
+# OS / Editor files
+# -------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# -------------------------
+# Node / Frontend (if any)
+# -------------------------
+node_modules/
+dist/
+build/
+
+# -------------------------
+# Pipenv
+# -------------------------
+Pipfile.lock
