@@ -26,9 +26,14 @@ class Config:
         'CELERY_RESULT_BACKEND', 'redis://localhost:6379/0'
     )
     
-class DevelopmentConfig(Config):
-    DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///dev_tickets.db'
+class ProductionConfig(Config):
+    DEBUG = False  # ✅ Added: Disable debug in production
+    
+    # ✅ Added: Fix for Render's PostgreSQL URL format
+    # Render provides postgres:// but SQLAlchemy needs postgresql://
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    if SQLALCHEMY_DATABASE_URI and SQLALCHEMY_DATABASE_URI.startswith('postgres://'):
+        SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace('postgres://', 'postgresql://', 1)
 
 class ProductionConfig(Config):
     pass
