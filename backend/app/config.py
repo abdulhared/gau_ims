@@ -1,25 +1,25 @@
-# config.py  (or wherever your Config classes live)
 import os
-
 from dotenv import load_dotenv
 
-load_dotenv()  # Load .env right at the top of the config module
+load_dotenv()  # Load .env variables
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'fallback-dev-key-change-me'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///tickets.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    
 
-    EMAIL_ADDRESS = os.environ.get('MAIL_USERNAME')
-    EMAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    # Flask-Mail settings
+    MAIL_SERVER = os.environ.get('MAIL_SERVER', 'smtp.gmail.com')
+    MAIL_PORT = int(os.environ.get('MAIL_PORT', 587))
+    MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS', 'True') == 'True'
+    MAIL_USE_SSL = os.environ.get('MAIL_USE_SSL', 'False') == 'True'
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    MAIL_DEFAULT_SENDER = os.environ.get('MAIL_DEFAULT_SENDER', os.environ.get('MAIL_USERNAME'))
 
 class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///dev_tickets.db'
 
-
 class ProductionConfig(Config):
-    # In production you should set DATABASE_URL and MAIL_PASSWORD via real environment variables
-    # (Render, Railway, Fly.io, Heroku, Docker secrets, etc.)
     pass

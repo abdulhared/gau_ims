@@ -18,9 +18,11 @@ def create_app(config_name='development'):
 
     # Register routes
     from app.routes.ticket import ticket_bp
+    from app.routes.ticket_actions import ticket_actions_bp
     
     
     app.register_blueprint(ticket_bp, url_prefix='/api')
+    app.register_blueprint(ticket_actions_bp, url_prefix='/api')
     
 
     return app

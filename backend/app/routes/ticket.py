@@ -3,6 +3,7 @@ from flask_mail import Message
 from app.extensions import db, mail               # ← mail must be initialized
 from app.models.models import SupportTicket
 
+
 ticket_bp = Blueprint('ticket_bp', __name__)
 
 @ticket_bp.route('/tickets', methods=['POST'])
@@ -24,7 +25,6 @@ def create_ticket():
             'message': 'Ticket created successfully',
             'ticket_id': new_ticket.id
         }), 201
-
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": "Failed to process request"}), 500
