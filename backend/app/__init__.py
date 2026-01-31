@@ -1,7 +1,7 @@
 from flask import Flask
+from .extensions import db, migrate, mail
+from app.celery_app import init_celery
 from flask_cors import CORS
-
-from app.extensions import db, migrate, mail
 
 def create_app(config_name='development'):
     app = Flask(__name__)
@@ -23,6 +23,13 @@ def create_app(config_name='development'):
     
     app.register_blueprint(ticket_bp, url_prefix='/api')
     app.register_blueprint(ticket_actions_bp, url_prefix='/api')
+
+
+    # ✅ Initialize Celery
+    app.celery_app = init_celery(app)
+
+    # ✅ IMPORT TASKS (THIS REGISTERS THEM)
+    import app.tasks.task 
     
 
     return app
