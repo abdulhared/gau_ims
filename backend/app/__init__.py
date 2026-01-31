@@ -27,9 +27,6 @@ def create_app(config_name='development'):
 
     # ✅ Initialize Celery
     app.celery_app = init_celery(app)
-
-    # ✅ IMPORT TASKS (THIS REGISTERS THEM)
-    import app.tasks.task 
     
 
     return app

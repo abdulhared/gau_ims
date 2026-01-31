@@ -1,12 +1,13 @@
 from app.celery_app import celery_app
-from flask_mail import Message
-from app.extensions import mail
-from app.models.models import SupportTicket
 
 @celery_app.task(name="send_email_received_async")
 def send_email_received_async(ticket_id):
     from app.models.models import SupportTicket
+    from flask_mail import Message
+    from app.extensions import mail
+    from app.models.models import SupportTicket
 
+    
     ticket = SupportTicket.query.get(ticket_id)
     if not ticket:
         return
