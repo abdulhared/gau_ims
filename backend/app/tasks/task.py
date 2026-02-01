@@ -26,7 +26,7 @@ Issue Type: {ticket.issue_type}
 We will get back to you shortly.
 
 Best regards,
-Support Team
+Zula Support Team 
 """
     )
 
